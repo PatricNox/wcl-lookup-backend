@@ -23,6 +23,7 @@ Specs:
 - [Docker Compose](https://docs.docker.com/compose/install/)
 - Any bash terminal
 - Windows 10 / Linux / MacOS
+- Warcraftlog API Key
 
 ## Getting started
 
@@ -88,6 +89,10 @@ There's an example file of the environment file that has been altered in order t
 amount of required manual editing. 
 
 `cp laravel/.env.example laravel/.env && ./dev.sh artisan key:generate`
+
+### WCL API
+
+Generate your client key at [Wacraftlogs Profile](https://www.warcraftlogs.com/profile) and update the `.env` file.
 
 ### Done!
 
