@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources;
+use App\Http\Resources\WCLCharacter;
 use App\WCLApi;
 use Illuminate\Http\Request;
 
@@ -11,9 +13,10 @@ class WCLController extends Controller
     /**
      * Lookup character through parses.
      *
-     * @return Illuminate\Http\Resources\Json\ResourceCollection
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
      **/
-    protected function lookupThroughParses(Request $request)
+    protected function lookupThroughParses(Request $request): \Illuminate\Http\JsonResponse
     {
         $request->validate([
             'character' => 'required|string',
@@ -26,12 +29,12 @@ class WCLController extends Controller
         // If we found parses for a character, retrieve the latest parse by startTime.
         $latestParse = null;
         if (!empty($result->json())) {
-            // Initilize startTime paramter to 0 if its null to prevent broken comparisation.
+            // Initialize startTime parameter to 0 if its null to prevent broken comparisation.
             $latestParse = array_reduce($result->json(), function ($previous, $next) {
                 return $previous['startTime'] > $next['startTime'] ? $previous : $next;
             }, ['startTime' => 0]);
         }
 
-        return response()->json($latestParse, 200);
+        return response()->json($latestParse, $result->status());
     }
 }
