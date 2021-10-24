@@ -39,6 +39,11 @@ class WCLController extends Controller
 
     private function validateResult(Response $result): bool
     {
+        // Fail if empty. (We expect array with objects, if status is present then its failed)
+        if (empty($result->json())) return false;
+        if (isset($result->object()->status))
+            return false;
+
         // Fail if empty.
         if (empty($result->json())) return false;
 
