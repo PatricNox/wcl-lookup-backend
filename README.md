@@ -1,7 +1,7 @@
 # WCL Lookup (Backend)
 This is the backend holding repository for the WCL lookup tool.
 
-**Frontend**: [WCL-Lookup-Frontend (ReactJS)](https://github.com/PatricNox/wcl-lookup-frontend) 
+**Frontend** (ReactJs): [WCL-Lookup-React](https://github.com/PatricNox/wcl-lookup-react) 
 
 
 ## Project
