@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources;
-use App\Http\Resources\WCLCharacter;
 use App\WCLApi;
+use Illuminate\Http\Client\Response;
 use Illuminate\Http\Request;
 
 class WCLController extends Controller
@@ -28,7 +27,7 @@ class WCLController extends Controller
 
         // If we found parses for a character, retrieve the latest parse by startTime.
         $latestParse = null;
-        if (!empty($result->json())) {
+        if ($this->validateResult($result)) {
             // Initialize startTime parameter to 0 if its null to prevent broken comparisation.
             $latestParse = array_reduce($result->json(), function ($previous, $next) {
                 return $previous['startTime'] > $next['startTime'] ? $previous : $next;
@@ -36,5 +35,18 @@ class WCLController extends Controller
         }
 
         return response()->json($latestParse, $result->status());
+    }
+
+    private function validateResult(Response $result): bool
+    {
+        // Fail if empty.
+        if (empty($result->json())) return false;
+
+        // Fail if character is hidden.
+        if (isset($result->object()->hidden)) {
+            return false;
+        }
+
+        return true;
     }
 }
