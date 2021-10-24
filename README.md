@@ -1,6 +1,9 @@
 # WCL Lookup (Backend)
 This is the backend holding repository for the WCL lookup tool.
 
+**Frontend**: [WCL-Lookup-Frontend (ReactJS)](https://github.com/PatricNox/wcl-lookup-frontend) 
+
+
 ## Project
 This project running on Laravel 7.x, using docker as the development
 environment setup.
@@ -8,6 +11,10 @@ environment setup.
 > In order to get the very same environment local as production, and amongst the developers, we use docker to emulate the prod server environment!
 
 You can learn more about docker and its possibilities at: [Docker.com](https://store.docker.com/search?type=edition&offering=community)
+
+## Preview
+
+**Live demo** (React): [https://wcl-tool.patricnox.info/](https://wcl-tool.patricnox.info/)
 
 
 ## Information
